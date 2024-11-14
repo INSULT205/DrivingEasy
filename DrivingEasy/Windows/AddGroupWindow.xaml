@@ -1,0 +1,54 @@
+﻿<Window x:Class="DrivingEasy.Windows.AddGroupWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:DrivingEasy.Windows" xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        mc:Ignorable="d"
+        WindowStyle="None" WindowStartupLocation="CenterScreen"
+        Title="AddGroupWindow" Height="300" Width="400">
+    <Grid>
+        <Grid.Background>
+            <LinearGradientBrush StartPoint="0.1,0" EndPoint="0.9,1">
+                <GradientStop Color="#303f9f" Offset="1" />
+                <GradientStop Color="#cf3539" Offset="0" />
+            </LinearGradientBrush>
+        </Grid.Background>
+
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+
+        <Border  Grid.Row="1" BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Center" Background="AliceBlue" CornerRadius="10">
+            <StackPanel HorizontalAlignment="Center" Background="AliceBlue" Margin="10 10 10 10">
+
+                <TextBlock
+                     HorizontalAlignment="Center"
+                     Text="Создание группы" FontWeight="Bold" FontSize="24"/>
+
+
+                    <TextBox Margin="0 10 0 10"
+                            VerticalAlignment="Center"
+                            x:Name="GroupTB"
+                            TextAlignment="Center"
+                            Style="{StaticResource MaterialDesignOutlinedTextBox}"/>
+                        
+                <StackPanel Orientation="Horizontal">
+                    <Button
+                      x:Name="BackBT"
+                      Click="BackBT_Click"
+                      Content="Вернуться"
+                      Margin="0 10 0 10"/>
+                    <Button
+                     x:Name="AddGroupBT"
+                     Click="AddGroupBT_Click"
+                     Content="Добавить"
+                     Margin="15 10 0 10"/>
+                </StackPanel>
+            </StackPanel>
+        </Border>
+
+    </Grid>
+</Window>

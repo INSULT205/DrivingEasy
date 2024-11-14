@@ -1,0 +1,171 @@
+﻿<Page x:Class="DrivingEasy.Pages.NavMenu"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:DrivingEasy.Pages"
+      mc:Ignorable="d" 
+      xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="NavMenu">
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+
+        <Border CornerRadius="8 0 0 8">
+            <Grid x:Name="gridMenu" Width="60">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition />
+                </Grid.RowDefinitions>
+
+                <!-- Menu -->
+                <Grid Grid.Column="0" Grid.RowSpan="2">
+                    <Grid.Background>
+                        <LinearGradientBrush StartPoint="0.1,0" EndPoint="0.9,1">
+                            <GradientStop Color="#303f9f" Offset="1" />
+                            <GradientStop Color="#cf3539" Offset="0" />
+                        </LinearGradientBrush>
+                    </Grid.Background>
+                </Grid>
+                <ToggleButton
+               HorizontalAlignment="Left"
+               Margin="10 0 0 0"
+               x:Name="MenuBT"
+               Content="{materialDesign:PackIcon Kind=Menu,Size=21}"
+               IsChecked="False"
+               Style="{StaticResource MaterialDesignFlatPrimaryToggleButton}"
+               ToolTip="MaterialDesignFlatPrimaryToggleButton" />
+
+                <StackPanel Grid.Row="1" VerticalAlignment="Center" >
+                    <StackPanel x:Name="NewsST" Orientation="Horizontal" Height="60">
+                        <Button Margin="10 0 0 0"
+                           x:Name="NewsPageBT"
+                             Click="NewsPageBT_Click"
+                           HorizontalAlignment="Center"
+                           IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}"
+                           Style="{StaticResource MaterialDesignFloatingActionMiniButton}"
+                           ToolTip="MaterialDesignFloatingActionMiniButton">
+                            <materialDesign:PackIcon Kind="NewspaperVariantMultiple" />
+                        </Button>
+                        <TextBlock Margin="10 0 0 0"
+                             x:Name="NewsPageTB"
+                             MouseLeftButtonDown="NewsPageTB_MouseLeftButtonDown"
+                            Foreground="White"
+                            FontSize="18"
+                            FontFamily="Comic Sans MS"
+                            VerticalAlignment="Center"
+                            Text="Новости"/>
+                    </StackPanel>
+
+                    <StackPanel x:Name="UserST" Orientation="Horizontal" Height="60">
+                        <Button Margin="10 0 0 0"
+                           x:Name="UsersPageBT"
+                           Click="UsersPageBT_Click"
+                           HorizontalAlignment="Center"
+                           IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}"
+                           Style="{StaticResource MaterialDesignFloatingActionMiniButton}"
+                           ToolTip="MaterialDesignFloatingActionMiniButton">
+                            <materialDesign:PackIcon Kind="AccountGroup" />
+                        </Button>
+                        <TextBlock Margin="10 0 0 0" 
+                                x:Name="UserPageTB"
+                                 MouseLeftButtonDown ="UserPageTB_MouseLeftButtonDown"
+                                Foreground="White"
+                            VerticalAlignment="Center"
+                                    FontSize="18"
+                                   FontFamily="Comic Sans MS"
+                            Text="Пользователи"/>
+                    </StackPanel>
+
+                    <StackPanel x:Name="TicketST" Orientation="Horizontal" Height="60">
+                        <Button Margin="10 0 0 0"
+                              x:Name="TicketBT"
+                              Click="TicketBT_Click"
+                              HorizontalAlignment="Center"
+                              IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}"
+                              Style="{StaticResource MaterialDesignFloatingActionMiniButton}"
+                              ToolTip="MaterialDesignFloatingActionMiniButton">
+                            <materialDesign:PackIcon Kind="Ticket" />
+                        </Button>
+                        <TextBlock Margin="10 0 0 0" 
+                               x:Name="TicketTB"
+                                MouseLeftButtonDown ="TicketBT_MouseLeftButtonDown"
+                               Foreground="White"
+                                    FontSize="18"
+                                   FontFamily="Comic Sans MS"
+                           VerticalAlignment="Center"
+                           Text="Билеты"/>
+                    </StackPanel>
+
+
+                    <StackPanel Orientation="Horizontal" Height="60">
+                        <Button Margin="10 0 0 0"
+                             x:Name="LessontBT"
+                             Click="LessontBT_Click"
+                            HorizontalAlignment="Center"
+                            IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}"
+                            Style="{StaticResource MaterialDesignFloatingActionMiniButton}"
+                            ToolTip="MaterialDesignFloatingActionMiniButton">
+                            <materialDesign:PackIcon Kind="InvoiceTextClockOutline" />
+                        </Button>
+                        <TextBlock Margin="10 0 0 0" 
+                                 x:Name="LessontTB"
+                                MouseLeftButtonDown="LessontTB_MouseLeftButtonDown"
+                                Foreground="White"
+                                    FontSize="18"
+                                   FontFamily="Comic Sans MS"
+                             VerticalAlignment="Center"
+                             Text="Расписание"/>
+                    </StackPanel>
+
+                    <StackPanel x:Name="StaticticST" Orientation="Horizontal" Height="60">
+                        <Button Margin="10 0 0 0"
+                                x:Name="StatisticBT"
+                                Click="StaticticBT_Click"
+                             HorizontalAlignment="Center"
+                             IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}"
+                             Style="{StaticResource MaterialDesignFloatingActionMiniButton}"
+                             ToolTip="MaterialDesignFloatingActionMiniButton">
+                            <materialDesign:PackIcon Kind="ChartAreaspline" />
+                        </Button>
+                        <TextBlock Margin="10 0 0 0" 
+                                   x:Name="StatisticTB"
+                                   MouseLeftButtonDown="StaticticTB_MouseLeftButtonDown"
+                                Foreground="White"
+                                    FontSize="18"
+                                   FontFamily="Comic Sans MS"
+                              VerticalAlignment="Center"
+                              Text="Статистика"/>
+                    </StackPanel>
+
+                    <StackPanel Orientation="Horizontal" Height="60">
+                        <Button Margin="10 0 0 0"
+                             x:Name="AccountBT"
+                             Click="AccountBT_Click"
+                             HorizontalAlignment="Center"
+                             IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}"
+                             Style="{StaticResource MaterialDesignFloatingActionMiniButton}"
+                             ToolTip="MaterialDesignFloatingActionMiniButton">
+                            <materialDesign:PackIcon Kind="Account" />
+                        </Button>
+                        <TextBlock Margin="10 0 0 0"
+                                x:Name="AccountTB"
+                                MouseLeftButtonDown="AccountTB_MouseLeftButtonDown"
+              VerticalAlignment="Center"
+                                   FontFamily="Comic Sans MS"
+                                Foreground="White"
+                                    FontSize="18"
+              Text="Профиль"/>
+                    </StackPanel>
+                </StackPanel>
+            </Grid>
+        </Border>
+
+        <Frame x:Name="ContentFrame"
+         Grid.Column="1"/>
+    </Grid>
+</Page>

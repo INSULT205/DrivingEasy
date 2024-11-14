@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="c4400a46b0524268bf638faaf4eb1c27" Name="Diagram1">
+        <EntityTypeShape EntityType="DrivingSchoolModel.AnswerQuestion" Width="1.5" PointX="6" PointY="12.75" />
+        <EntityTypeShape EntityType="DrivingSchoolModel.Answers" Width="1.5" PointX="3.75" PointY="14.5" />
+        <EntityTypeShape EntityType="DrivingSchoolModel.Group" Width="1.5" PointX="0.75" PointY="5" />
+        <EntityTypeShape EntityType="DrivingSchoolModel.News" Width="1.5" PointX="5.25" PointY="8.625" />
+        <EntityTypeShape EntityType="DrivingSchoolModel.Questions" Width="1.5" PointX="3.75" PointY="11.75" />
+        <EntityTypeShape EntityType="DrivingSchoolModel.QuestionsTicket" Width="1.5" PointX="8" PointY="9.75" />
+        <EntityTypeShape EntityType="DrivingSchoolModel.Role" Width="1.5" PointX="0.75" PointY="2.125" />
+        <EntityTypeShape EntityType="DrivingSchoolModel.Schedule" Width="1.5" PointX="5.25" PointY="4.25" />
+        <EntityTypeShape EntityType="DrivingSchoolModel.Status" Width="1.5" PointX="3" PointY="0.75" />
+        <EntityTypeShape EntityType="DrivingSchoolModel.sysdiagrams" Width="1.5" PointX="5.75" PointY="1" />
+        <EntityTypeShape EntityType="DrivingSchoolModel.Tickets" Width="1.5" PointX="5.75" PointY="16.875" />
+        <EntityTypeShape EntityType="DrivingSchoolModel.TypeClass" Width="1.5" PointX="3" PointY="9.125" />
+        <EntityTypeShape EntityType="DrivingSchoolModel.User" Width="1.5" PointX="3" PointY="3.75" />
+        <EntityTypeShape EntityType="DrivingSchoolModel.UserAnswer" Width="1.5" PointX="8.25" PointY="4.875" />
+        <AssociationConnector Association="DrivingSchoolModel.FK_AnswerQuestion_Answers" />
+        <AssociationConnector Association="DrivingSchoolModel.FK_AnswerQuestion_Questions" />
+        <AssociationConnector Association="DrivingSchoolModel.FK_UserAnswer_AnswerQuestion" />
+        <AssociationConnector Association="DrivingSchoolModel.FK_Schedule_Group" />
+        <AssociationConnector Association="DrivingSchoolModel.FK_Student_GroupId" />
+        <AssociationConnector Association="DrivingSchoolModel.FK_News_User" />
+        <AssociationConnector Association="DrivingSchoolModel.FK_QuestionsTicket_Questions" />
+        <AssociationConnector Association="DrivingSchoolModel.FK_QuestionsTicket_Tickets" />
+        <AssociationConnector Association="DrivingSchoolModel.FK_User_Role" />
+        <AssociationConnector Association="DrivingSchoolModel.FK_Schedule_Status" />
+        <AssociationConnector Association="DrivingSchoolModel.FK_Schedule_TypeClass" />
+        <AssociationConnector Association="DrivingSchoolModel.FK_Schedule_User1" />
+        <AssociationConnector Association="DrivingSchoolModel.FK_Schedule_User2" />
+        <AssociationConnector Association="DrivingSchoolModel.FK_UserAnswer_User" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

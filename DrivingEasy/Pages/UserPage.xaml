@@ -1,0 +1,146 @@
+﻿<Page x:Class="DrivingEasy.Pages.Admin.UserPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:DrivingEasy.Pages.Admin"
+      mc:Ignorable="d" 
+      xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="UserPage"
+      Loaded="Page_Loaded">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition />
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <StackPanel HorizontalAlignment="Center">
+            <TextBlock Text="Просмотр пользователей"
+                   Margin="15 5 0 0"
+                   HorizontalAlignment="Center"
+                   FontWeight="Bold" 
+                   FontSize="24"/>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" Margin="0 5 0 0">
+
+                <TextBlock Text="Поиск: "
+                            FontWeight="Bold"
+                           VerticalAlignment="Center"
+                           FontSize="20"/>
+
+                <TextBox x:Name="SearchTB" 
+                Height="40"
+                Padding="10,10"
+                 Width="250"
+                 Style="{StaticResource MaterialDesignOutlinedTextBox}"
+                 TextChanged="SearchTB_TextChanged"/>
+                
+                <ComboBox x:Name="RoleCB"
+                  DisplayMemberPath="Name"
+                  Height="40"
+                  Padding="10,10"
+                  Margin="20 0 20 0"
+                  VerticalAlignment="Center" Width="200"
+                  Style="{StaticResource MaterialDesignOutlinedComboBox}"
+                  materialDesign:HintAssist.Hint="Роль"
+                  SelectionChanged="RoleCB_SelectionChanged"/>
+
+               
+                <ComboBox x:Name="GroupCB"
+                  DisplayMemberPath="Name"
+                  Height="40"
+                  Padding="10,10"
+                  VerticalAlignment="Center"
+                  Style="{StaticResource MaterialDesignOutlinedComboBox}"
+                  materialDesign:HintAssist.Hint="Группа"
+                  Width="150" SelectionChanged="GroupCB_SelectionChanged" Cursor=""/>
+                
+            </StackPanel>
+        </StackPanel>
+        <ListView
+        Grid.Row="1"
+        x:Name="UserRecordingLV"
+        VerticalAlignment="Center"
+        HorizontalAlignment="Center"
+        ScrollViewer.HorizontalScrollBarVisibility="Hidden">
+            <ListView.View>
+                <GridView>
+                    <GridView.Columns>
+                        <GridViewColumn Header ="Пользователь">
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <StackPanel HorizontalAlignment="Center">
+                                        <StackPanel Orientation="Horizontal">
+                                            <TextBlock Text="{Binding FullName}"/>
+                                        </StackPanel>
+                                        <StackPanel Orientation="Horizontal">
+                                            <TextBlock 
+                                    Text="{Binding Email}"/>
+                                        </StackPanel>
+                                        <StackPanel>
+                                            <TextBlock 
+                                    Text="{Binding Phone}"/>
+                                        </StackPanel>
+                                    </StackPanel>
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
+
+                        <GridViewColumn Header ="Должность">
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <StackPanel HorizontalAlignment="Center">
+                                        <TextBlock Text="{Binding Role.Name}"/>
+                                    </StackPanel>
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
+
+                        <GridViewColumn Header ="Группа">
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <StackPanel HorizontalAlignment="Center">
+                                        <TextBlock Text="{Binding Group.Name}"/>
+                                    </StackPanel>
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
+
+                        <GridViewColumn Header ="Заблокирован">
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <StackPanel HorizontalAlignment="Center">
+                                        <CheckBox IsHitTestVisible="False" IsChecked="{Binding IsBlocked}"/>
+                                    </StackPanel>
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
+                    </GridView.Columns>
+                </GridView>
+            </ListView.View>
+        </ListView>
+
+        <StackPanel Grid.Row="3" Grid.ColumnSpan="2" Orientation="Horizontal" HorizontalAlignment="Center">
+            <Button
+            x:Name="DeleteBT"
+            Click="DeleteBT_Click"
+            Width="150"
+            Margin="5 5 5 5"
+            Content="Удалить"/>
+            <Button
+             x:Name="EditBT"
+             Click="EditBT_Click"
+             Width="150"
+             Margin="5 5 5 5"
+             Content="Редактировать"/>
+            <Button 
+            x:Name="AddUserBT"
+            Click="AddUserBT_Click"
+            Width="150"
+            Margin="5 5 5 5"
+            Content="Добавить"/>
+        </StackPanel>
+
+    </Grid>
+</Page>

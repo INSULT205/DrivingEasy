@@ -1,0 +1,106 @@
+﻿<Page x:Class="DrivingEasy.Pages.StudyPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:DrivingEasy.Pages"
+      xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="StudyPage">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+
+        <TextBlock Text="Обучение"
+               Grid.ColumnSpan="3"
+               Margin="15 0 0 0"
+               TextAlignment="Center"
+               HorizontalAlignment="Center"
+               FontWeight="Bold" 
+               FontSize="24"/>
+
+        <StackPanel Grid.Row="1">
+            <StackPanel HorizontalAlignment="Center"  Orientation="Vertical">
+                <TextBlock
+                     FontSize="22"
+                    Text="Вопросы" FontWeight="Bold"/>
+                <TextBlock 
+                    FontSize="22"
+                    TextAlignment="Center"
+                    Text="kol-vo"/>
+            </StackPanel>
+        </StackPanel>
+
+        <StackPanel Grid.Row="1" Grid.Column="1">
+            <StackPanel HorizontalAlignment="Center"  Orientation="Vertical">
+                <TextBlock
+                    FontSize="22"
+            Text="Билеты" FontWeight="Bold"/>
+                <TextBlock
+                    FontSize="22"
+                    TextAlignment="Center"
+            Text="kol-vo"/>
+            </StackPanel>
+        </StackPanel>
+
+        <StackPanel Grid.Row="1" Grid.Column="2">
+            <StackPanel HorizontalAlignment="Center"  Orientation="Vertical">
+                <TextBlock
+                    FontSize="22"
+    Text="Ошибки" FontWeight="Bold"/>
+                <TextBlock
+                    FontSize="22"
+                     TextAlignment="Center"
+    Text="kol-vo"/>
+            </StackPanel>
+        </StackPanel>
+
+        <StackPanel Grid.Row="2" Grid.ColumnSpan="3"
+             HorizontalAlignment="Center"
+             VerticalAlignment="Center"
+             Orientation="Horizontal">
+            
+            <StackPanel>
+                <Button x:Name="TicketsBT"
+                        Click="TicketsBT_Click"
+                        Background="#666ad1"
+             Width="150"
+             Height="50"
+             Content="Билеты"/>
+                <Button 
+             Width="150"
+             Height="50"
+             Background="#FFBA2327"
+             Margin="0 20 0 0"
+             x:Name="MistakeBT"
+             Content="Ошибки"/>
+            </StackPanel>
+
+            <StackPanel Margin="20 0 0 0">
+                <Button x:Name="MarathonBT"
+                     Width="150"
+                     Height="50"
+                     Content="Марафон"/>
+                <Button 
+                     Width="150"
+                    Background="#001970"
+                     Height="50"
+                     Margin="0 20 0 0"
+                     x:Name="ExamBT"
+                     Content="Экзамен"/>
+            </StackPanel>
+        </StackPanel>
+       
+        
+    </Grid>
+</Page>

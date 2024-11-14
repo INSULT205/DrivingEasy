@@ -1,0 +1,77 @@
+﻿<Page x:Class="DrivingEasy.Pages.AutorizationPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:DrivingEasy.Pages" 
+      xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="AutorizationPage">
+
+    <Grid>
+        <Grid.Background>
+            <LinearGradientBrush StartPoint="0.1,0" EndPoint="0.9,1">
+                <GradientStop Color="#303f9f" Offset="1" />
+                <GradientStop Color="#cf3539" Offset="0" />
+            </LinearGradientBrush>
+        </Grid.Background>
+        
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+     
+        <Border  Grid.Row="1" BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Center" Background="AliceBlue" CornerRadius="10">
+            <StackPanel HorizontalAlignment="Center" Background="AliceBlue" Margin="10 10 10 10">
+
+                <StackPanel HorizontalAlignment="Center">
+                    <TextBlock
+                        HorizontalAlignment="Center"
+                        Text="Добро пожаловать" FontWeight="Bold" FontSize="26"/>
+                    <TextBlock
+                        HorizontalAlignment="Center"
+                        Text="Мы рады вас видеть!"  FontWeight="Bold" FontSize="26"/>
+                </StackPanel>
+
+                <StackPanel Orientation="Horizontal" Margin="10">
+                    <materialDesign:PackIcon Kind="User" Width="25" Height="50" Foreground="Black"/>
+                    <TextBox x:Name="LoginTb" Margin="10 0 0 0" 
+                             Height="40"
+                             Padding="10,10"
+                              Style="{StaticResource MaterialDesignOutlinedTextBox}"
+                             materialDesign:HintAssist.Hint="Email" 
+                             Foreground="Black" Width="250"/>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" Margin="10" >
+                    <materialDesign:PackIcon Kind="Lock" Width="25" Height="50" Foreground="Black"/>
+                    <PasswordBox x:Name="PasswordPb" Margin="10 0 0 0" 
+                                 Height="40"
+                                Padding="10,10"
+                                 materialDesign:HintAssist.Hint="Пароль"
+                                 materialDesign:TextFieldAssist.HasClearButton="True"
+                                 Style="{StaticResource MaterialDesignOutlinedRevealPasswordBox}"
+                                 Foreground="Black" Width="250"/>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" Margin="13 5 10 0">
+                    <CheckBox Name="CheckBoxRememberMe" 
+                        VerticalAlignment="Center"
+                        FontSize="24"
+                        Margin="0,1,5,0"/>  
+                    <TextBlock Text="Запомнить меня" 
+                                FontSize="16"
+                        VerticalAlignment="Center"/>
+                </StackPanel>
+                <StackPanel>
+                    <Button
+                            x:Name="LoginBT"
+                            Click="LoginBT_Click"
+                            Content="Войти"
+                            Margin="0 10 0 10"/>
+                </StackPanel>
+            </StackPanel>
+        </Border>
+
+    </Grid>
+</Page>
