@@ -1,30 +1,22 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace DrivingEasy.Components
 {
-    /// <summary>
-    /// Логика взаимодействия для QuestionDetailControl.xaml
-    /// </summary>
     public partial class QuestionDetailControl : UserControl
     {
         private User contextUser;
         private Questions currentQuestion;
         private List<AnswerQuestion> answerOptions;
         private int questionNumber;
+        private bool answerSelected = false;
+
+        public event EventHandler<(bool isCorrect, int questionNumber, AnswerQuestion selectedAnswer)> AnswerSelected;
 
         public QuestionDetailControl(Questions question, List<AnswerQuestion> answers, User user, int questionNumber)
         {
@@ -36,8 +28,7 @@ namespace DrivingEasy.Components
 
             LoadQuestionImage(question.Photo);
             QuestionDescription.Text = question.Description;
-            AnswersList.ItemsSource = answerOptions;
-            this.DataContext = this;
+            LoadAnswers();
         }
 
         private void LoadQuestionImage(byte[] imageData)
@@ -60,91 +51,102 @@ namespace DrivingEasy.Components
             }
         }
 
-        private void Answer_Checked(object sender, RoutedEventArgs e)
+        private void LoadAnswers()
         {
-            var selectedAnswer = (sender as RadioButton).DataContext as AnswerQuestion;
-
-            SaveUserAnswer(selectedAnswer.Id);
-
-            bool isCorrect = selectedAnswer.IsRight ?? false;
-
-            var radioButton = sender as RadioButton;
-            if (isCorrect)
+            foreach (var answer in answerOptions)
             {
-                radioButton.Foreground = Brushes.Green;
-                radioButton.Background = Brushes.Green;
-            }
-            else
-            {
-                radioButton.Foreground = Brushes.Red;
-                radioButton.Background = Brushes.Red;
+                var answerControl = new StackPanel
+                {
+                    Orientation = Orientation.Horizontal,
+                    Margin = new Thickness(5)
+                };
 
-                ShowCorrectAnswer();
-            }
+                var radioButton = new RadioButton
+                {
+                    Tag = answer,
+                    VerticalAlignment = VerticalAlignment.Center
+                };
+                radioButton.Checked += Answer_Checked;
 
-            UpdateQuestionButtonColor(isCorrect);
+                var answerText = new TextBlock
+                {
+                    Text = answer.Answers.Decription,
+                    TextWrapping = TextWrapping.Wrap,
+                    Margin = new Thickness(5),
+                    Foreground = Brushes.Black
+                };
+
+                answerText.MouseLeftButtonUp += (s, e) =>
+                {
+                    if (!answerSelected)
+                    {
+                        radioButton.RaiseEvent(new RoutedEventArgs(RadioButton.CheckedEvent));
+                    }
+                };
+
+                answerControl.Children.Add(radioButton);
+                answerControl.Children.Add(answerText);
+                AnswerStack.Children.Add(answerControl);
+            }
         }
 
-        private void ShowCorrectAnswer()
+        public void SetSelectedAnswer(AnswerQuestion selectedAnswer)
         {
-            foreach (var item in AnswersList.Items)
+            foreach (StackPanel answerControl in AnswerStack.Children)
             {
-                var container = AnswersList.ItemContainerGenerator.ContainerFromItem(item) as FrameworkElement;
-                if (container != null)
-                {
-                    var radioButton = container.FindName("AnswerRadioButton") as RadioButton;
+                var radioButton = answerControl.Children[0] as RadioButton;
+                var answerText = answerControl.Children[1] as TextBlock;
 
-                    if (radioButton != null && (bool)radioButton.Tag == true)
+                if (radioButton?.Tag is AnswerQuestion answer)
+                {
+                    if (answer == selectedAnswer)
                     {
-                        radioButton.Foreground = Brushes.Green;
-                        radioButton.Background = Brushes.Green;
+                        radioButton.IsChecked = true;
+                        answerControl.Background = answer.IsRight.GetValueOrDefault() ? Brushes.Green : Brushes.Red;
+                        answerText.Foreground = Brushes.White;
                     }
                 }
             }
+            answerSelected = true;
         }
-        private TicketQuestionsPage GetParentPage()
-        {
-            DependencyObject parent = this;
-            while (parent != null && !(parent is TicketQuestionsPage))
-            {
-                parent = VisualTreeHelper.GetParent(parent);
-            }
-            return parent as TicketQuestionsPage;
-        }
-        private void UpdateQuestionButtonColor(bool isCorrect)
-        {
-            var parentPage = GetParentPage();
-            var questionButton = parentPage?.QuestionsWp.Children
-                               .OfType<QuestionButtonControl>()
-                               .FirstOrDefault(b => b.QuestionNumber == questionNumber);
 
-            if (questionButton != null)
-            {
-                questionButton.QuestionButton.Background = isCorrect ? Brushes.Green : Brushes.Red;
-                questionButton.QuestionButton.Foreground = Brushes.White;
-            }
-        }
-        private void SaveUserAnswer(int answerQuestionId)
+        private void Answer_Checked(object sender, RoutedEventArgs e)
         {
-            var existingAnswer = App.DB.UserAnswer
-                                       .FirstOrDefault(ua => ua.AnswerQuestionId == answerQuestionId && ua.UserId == contextUser.Id);
+            if (answerSelected) return;
 
-            if (existingAnswer == null)
+            var selectedAnswer = (sender as RadioButton)?.Tag as AnswerQuestion;
+
+            bool isCorrect = selectedAnswer?.IsRight ?? false;
+
+            foreach (StackPanel answerControl in AnswerStack.Children)
             {
-                var userAnswer = new UserAnswer
+                var radioButton = answerControl.Children[0] as RadioButton;
+                var answerText = answerControl.Children[1] as TextBlock;
+
+                if (radioButton?.Tag is AnswerQuestion answer)
                 {
-                    AnswerQuestionId = answerQuestionId,
-                    UserId = contextUser.Id
-                };
+                    if (answer.IsRight == true)
+                    {
+                        answerControl.Background = Brushes.Green;
+                        answerText.Foreground = Brushes.White;
+                    }
+                    else if (selectedAnswer == answer)
+                    {
+                        answerControl.Background = Brushes.Red;
+                        answerText.Foreground = Brushes.White;
+                    }
+                    else
+                    {
+                        answerControl.Background = Brushes.Transparent;
+                        answerText.Foreground = Brushes.Black;
+                    }
 
-                App.DB.UserAnswer.Add(userAnswer);
-            }
-            else
-            {
-                existingAnswer.AnswerQuestionId = answerQuestionId;
+                    radioButton.IsEnabled = false;
+                }
             }
 
-            App.DB.SaveChanges();
+            answerSelected = true;
+            AnswerSelected?.Invoke(this, (isCorrect, questionNumber, selectedAnswer));
         }
     }
 }

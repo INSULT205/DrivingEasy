@@ -1,35 +1,27 @@
-﻿using DrivingEasy.Components;
-using System;
-using System.Collections.Generic;
-using System.Data.Entity;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
 using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
+using DrivingEasy.Components;
+using DrivingEasy.Pages;
 
 namespace DrivingEasy
 {
-    /// <summary>
-    /// Логика взаимодействия для TicketQuestionsPage.xaml
-    /// </summary>
     public partial class TicketQuestionsPage : Page
     {
-        Tickets contextTickets;
-        User contextUser;
+        private Tickets contextTickets;
+        private User contextUser;
         private List<Questions> questionsList;
+        private List<QuestionButtonControl> questionButtons;
+        private Dictionary<int, AnswerQuestion> selectedAnswers = new Dictionary<int, AnswerQuestion>();
+
         public TicketQuestionsPage(User user, Tickets tickets)
         {
             InitializeComponent();
             contextUser = user;
             contextTickets = tickets;
+            questionButtons = new List<QuestionButtonControl>();
 
             LoadQuestions();
             InitializeQuestionButtons();
@@ -39,6 +31,7 @@ namespace DrivingEasy
                 ShowQuestion(0);
             }
         }
+
         private void LoadQuestions()
         {
             var questionIds = App.DB.QuestionsTicket
@@ -50,13 +43,16 @@ namespace DrivingEasy
                                   .Where(q => questionIds.Contains(q.Id))
                                   .ToList();
         }
+
         private void InitializeQuestionButtons()
         {
-            for (int i = 1; i <= 20; i++)
+            for (int i = 1; i <= questionsList.Count; i++)
             {
                 var questionButton = new QuestionButtonControl { QuestionNumber = i };
+                questionButton.Margin = new Thickness(5);
                 questionButton.QuestionButton.Click += QuestionButton_Click;
                 QuestionsWp.Children.Add(questionButton);
+                questionButtons.Add(questionButton);
             }
         }
 
@@ -75,7 +71,70 @@ namespace DrivingEasy
                                 .Where(aq => aq.QuestionId == question.Id)
                                 .ToList();
 
-            QuestionsFr.Content = new QuestionDetailControl(question, answers, contextUser, questionIndex + 1);
+            var questionDetail = new QuestionDetailControl(question, answers, contextUser, questionIndex + 1);
+
+            questionDetail.AnswerSelected += UpdateQuestionButtonColor;
+
+            if (selectedAnswers.ContainsKey(questionIndex))
+            {
+                questionDetail.SetSelectedAnswer(selectedAnswers[questionIndex]);
+            }
+
+            QuestionsFr.Content = questionDetail;
+        }
+
+        private void UpdateQuestionButtonColor(object sender, (bool isCorrect, int questionNumber, AnswerQuestion selectedAnswer) e)
+        {
+            var buttonControl = questionButtons[e.questionNumber - 1];
+            buttonControl.SelectedAnswer = e.selectedAnswer;
+            buttonControl.QuestionButton.Background = e.isCorrect ? Brushes.Green : Brushes.Red;
+
+            selectedAnswers[e.questionNumber - 1] = e.selectedAnswer;
+
+            SaveAnswerToDatabase(e.selectedAnswer);
+
+            if (selectedAnswers.Count == questionsList.Count)
+            {
+                ShowResult();
+            }
+        }
+
+        private void SaveAnswerToDatabase(AnswerQuestion selectedAnswer)
+        {
+            var existingAnswer = App.DB.UserAnswer
+                                      .FirstOrDefault(ua => ua.UserId == contextUser.Id && ua.AnswerQuestionId == selectedAnswer.Id);
+
+            if (existingAnswer != null)
+            {
+                existingAnswer.AnswerQuestionId = selectedAnswer.Id;
+                App.DB.SaveChanges();
+            }
+            else
+            {
+                App.DB.UserAnswer.Add(new UserAnswer
+                {
+                    AnswerQuestionId = selectedAnswer.Id,
+                    UserId = contextUser.Id
+                });
+                App.DB.SaveChanges();
+            }
+        }
+
+        private void ShowResult()
+        {
+            int correctAnswers = selectedAnswers
+                                 .Count(sa => sa.Value.IsRight == true);  
+
+            int totalQuestions = questionsList.Count;  
+
+            MessageBox.Show($"Вы решили {correctAnswers} из {totalQuestions} вопросов правильно.");
+
+            NavigationService.Navigate(new TicketsPage(contextUser));
+        }
+
+        private void ExitBT_Click(object sender, RoutedEventArgs e)
+        {
+            NavigationService.Navigate(new TicketsPage(contextUser));
         }
     }
 }

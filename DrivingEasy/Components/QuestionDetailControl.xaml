@@ -9,18 +9,7 @@
         <StackPanel>
             <Image x:Name="QuestionImage" Height="400" Width="600"/>
             <TextBlock x:Name="QuestionDescription" TextWrapping="Wrap" Margin="5"/>
-            <ItemsControl x:Name="AnswersList">
-                <ItemsControl.ItemTemplate>
-                    <DataTemplate>
-                        <RadioButton Content="{Binding Answers.Decription}" 
-                         GroupName="AnswersGroup"
-                         Checked="Answer_Checked"
-                         Tag="{Binding IsRight}"
-                         x:Name="AnswerRadioButton"/>
-                    </DataTemplate>
-                </ItemsControl.ItemTemplate>
-            </ItemsControl>
-
+            <StackPanel x:Name="AnswerStack" Margin="10"/>
         </StackPanel>
     </Grid>
 </UserControl>
