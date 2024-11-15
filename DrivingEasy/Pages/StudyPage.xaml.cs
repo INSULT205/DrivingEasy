@@ -30,7 +30,22 @@ namespace DrivingEasy.Pages
 
         private void TicketsBT_Click(object sender, RoutedEventArgs e)
         {
-            NavigationService.Navigate(new TicketsPage(contextUser));
+            NavigationService.Navigate(new TicketsPage(contextUser,1));
+        }
+
+        private void MistakeBT_Click(object sender, RoutedEventArgs e)
+        {
+            NavigationService.Navigate(new TicketsPage(contextUser,2));
+        }
+
+        private void MarathonBT_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void ExamBT_Click(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }

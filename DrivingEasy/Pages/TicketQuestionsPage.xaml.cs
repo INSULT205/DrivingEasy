@@ -15,12 +15,14 @@ namespace DrivingEasy
         private List<Questions> questionsList;
         private List<QuestionButtonControl> questionButtons;
         private Dictionary<int, AnswerQuestion> selectedAnswers = new Dictionary<int, AnswerQuestion>();
+        private int typeStudy;
 
-        public TicketQuestionsPage(User user, Tickets tickets)
+        public TicketQuestionsPage(User user, Tickets tickets, int typeStudy)
         {
             InitializeComponent();
             contextUser = user;
             contextTickets = tickets;
+            this.typeStudy = typeStudy;
             questionButtons = new List<QuestionButtonControl>();
 
             LoadQuestions();
@@ -42,6 +44,23 @@ namespace DrivingEasy
             questionsList = App.DB.Questions
                                   .Where(q => questionIds.Contains(q.Id))
                                   .ToList();
+
+            if (typeStudy == 2)
+            {
+                var incorrectQuestions = App.DB.UserAnswer
+                   .Where(ua => ua.UserId == contextUser.Id && ua.AnswerQuestion.IsRight == false && questionIds.Contains(ua.AnswerQuestion.QuestionId))
+                   .Select(ua => ua.AnswerQuestion.QuestionId)
+                   .Distinct()
+                   .ToList();
+
+                questionsList = questionsList.Where(q => incorrectQuestions.Contains(q.Id)).ToList();
+
+                if (questionsList.Count == 0)
+                {
+                    MessageBox.Show("Вы исправили все ошибки в данном билете.");
+                    NavigationService.Navigate(new TicketsPage(contextUser, 2));
+                }
+            }
         }
 
         private void InitializeQuestionButtons()
@@ -87,7 +106,20 @@ namespace DrivingEasy
         {
             var buttonControl = questionButtons[e.questionNumber - 1];
             buttonControl.SelectedAnswer = e.selectedAnswer;
-            buttonControl.QuestionButton.Background = e.isCorrect ? Brushes.Green : Brushes.Red;
+
+            var questionId = questionsList[e.questionNumber - 1].Id;
+            var correctAnswer = App.DB.AnswerQuestion
+                                      .Where(aq => aq.QuestionId == questionId && aq.IsRight == true)
+                                      .SingleOrDefault(); 
+
+            if (correctAnswer != null && correctAnswer.Id == e.selectedAnswer.Id)
+            {
+                buttonControl.QuestionButton.Background = Brushes.Green;
+            }
+            else
+            {
+                buttonControl.QuestionButton.Background = Brushes.Red;
+            }
 
             selectedAnswers[e.questionNumber - 1] = e.selectedAnswer;
 
@@ -95,14 +127,22 @@ namespace DrivingEasy
 
             if (selectedAnswers.Count == questionsList.Count)
             {
-                ShowResult();
+                if (typeStudy == 2 && selectedAnswers.Values.All(ans => ans.IsRight == true))
+                {
+                    MessageBox.Show("Вы исправили все ошибки в данном билете.");
+                    NavigationService.Navigate(new TicketsPage(contextUser, 2));
+                }
+                else
+                {
+                    ShowProgress();
+                }
             }
         }
 
         private void SaveAnswerToDatabase(AnswerQuestion selectedAnswer)
         {
             var existingAnswer = App.DB.UserAnswer
-                                      .FirstOrDefault(ua => ua.UserId == contextUser.Id && ua.AnswerQuestionId == selectedAnswer.Id);
+                                      .FirstOrDefault(ua => ua.UserId == contextUser.Id && ua.AnswerQuestion.QuestionId == selectedAnswer.QuestionId);
 
             if (existingAnswer != null)
             {
@@ -120,21 +160,34 @@ namespace DrivingEasy
             }
         }
 
+        private void ShowProgress()
+        {
+            int correctAnswers = selectedAnswers.Count(sa => sa.Value.IsRight == true);
+            int totalQuestions = questionsList.Count;
+
+            if (correctAnswers < totalQuestions)
+            {
+                MessageBox.Show($"Вы исправили {correctAnswers} из {totalQuestions} вопросов.");
+                NavigationService.Navigate(new TicketsPage(contextUser, typeStudy));
+            }
+            else
+            {
+                ShowResult();
+            }
+        }
+
         private void ShowResult()
         {
-            int correctAnswers = selectedAnswers
-                                 .Count(sa => sa.Value.IsRight == true);  
-
-            int totalQuestions = questionsList.Count;  
+            int correctAnswers = selectedAnswers.Count(sa => sa.Value.IsRight == true);
+            int totalQuestions = questionsList.Count;
 
             MessageBox.Show($"Вы решили {correctAnswers} из {totalQuestions} вопросов правильно.");
-
-            NavigationService.Navigate(new TicketsPage(contextUser));
+            NavigationService.Navigate(new TicketsPage(contextUser, typeStudy));
         }
 
         private void ExitBT_Click(object sender, RoutedEventArgs e)
         {
-            NavigationService.Navigate(new TicketsPage(contextUser));
+            NavigationService.Navigate(new TicketsPage(contextUser, typeStudy));
         }
     }
 }

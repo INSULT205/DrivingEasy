@@ -83,6 +83,7 @@
              Background="#FFBA2327"
              Margin="0 20 0 0"
              x:Name="MistakeBT"
+             Click="MistakeBT_Click"
              Content="Ошибки"/>
             </StackPanel>
 
@@ -90,6 +91,7 @@
                 <Button x:Name="MarathonBT"
                      Width="150"
                      Height="50"
+                     Click="MarathonBT_Click"
                      Content="Марафон"/>
                 <Button 
                      Width="150"
@@ -97,6 +99,7 @@
                      Height="50"
                      Margin="0 20 0 0"
                      x:Name="ExamBT"
+                    Click="ExamBT_Click"
                      Content="Экзамен"/>
             </StackPanel>
         </StackPanel>

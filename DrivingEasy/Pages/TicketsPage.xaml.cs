@@ -11,11 +11,13 @@ namespace DrivingEasy.Pages
     public partial class TicketsPage : Page
     {
         User contextUser;
+        int typeStudy;
 
-        public TicketsPage(User user)
+        public TicketsPage(User user, int typeStudy)
         {
             InitializeComponent();
             contextUser = user;
+            this.typeStudy = typeStudy;
 
             TicketsLV.ItemsSource = GetTicketsWithResult();
         }
@@ -42,7 +44,6 @@ namespace DrivingEasy.Pages
                 else
                 {
                     bool allCorrect = userAnswers.All(ua => ua.AnswerQuestion.IsRight == true);
-
                     bool hasIncorrect = userAnswers.Any(ua => ua.AnswerQuestion.IsRight == false);
 
                     if (allCorrect)
@@ -60,16 +61,22 @@ namespace DrivingEasy.Pages
                 }
             }
 
-            return tickets;
+            if (typeStudy == 2)
+            {
+                return tickets.Where(ticket => ticket.BackgroundColor == Brushes.Red);
+            }
+            else
+            {
+                return tickets;
+            }
         }
-
 
         private void TicketsLV_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             var selectedTicket = TicketsLV.SelectedItem as Tickets;
             if (selectedTicket != null)
             {
-                NavigationService.Navigate(new TicketQuestionsPage(contextUser, selectedTicket));
+                NavigationService.Navigate(new TicketQuestionsPage(contextUser, selectedTicket, typeStudy));
             }
         }
     }
