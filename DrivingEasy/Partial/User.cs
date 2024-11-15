@@ -9,18 +9,7 @@ namespace DrivingEasy
 {
     public partial class User
     {
-        //[JsonIgnore]
-        //public virtual Role Role
-        //{
-        //    get
-        //    {
-        //        return DBConnection.Roles.FirstOrDefault(x => x.Id == RoleId);
-        //    }
-        //    set
-        //    {
-        //        RoleId = value.Id;
-        //    }
-        //}
+        
         public string FullName
         {
             get

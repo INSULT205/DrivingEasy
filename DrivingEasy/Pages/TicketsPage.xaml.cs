@@ -1,37 +1,76 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Security.RightsManagement;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
 using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
+using DrivingEasy.Pages;
 
 namespace DrivingEasy.Pages
 {
-    /// <summary>
-    /// Логика взаимодействия для TicketsPage.xaml
-    /// </summary>
     public partial class TicketsPage : Page
     {
         User contextUser;
+
         public TicketsPage(User user)
         {
             InitializeComponent();
             contextUser = user;
-            TicketsLV.ItemsSource = App.DB.Tickets.ToList();
+
+            TicketsLV.ItemsSource = GetTicketsWithResult();
         }
+
+        public IEnumerable<Tickets> GetTicketsWithResult()
+        {
+            var tickets = App.DB.Tickets.ToList();
+
+            foreach (var ticket in tickets)
+            {
+                var questionIds = App.DB.QuestionsTicket
+                    .Where(qt => qt.TicketId == ticket.Id)
+                    .Select(qt => qt.QuestionsId)
+                    .ToList();
+
+                var userAnswers = App.DB.UserAnswer
+                    .Where(ua => ua.UserId == contextUser.Id && questionIds.Contains(ua.AnswerQuestion.QuestionId))
+                    .ToList();
+
+                if (userAnswers.Count == 0)
+                {
+                    ticket.BackgroundColor = Brushes.Transparent;
+                }
+                else
+                {
+                    bool allCorrect = userAnswers.All(ua => ua.AnswerQuestion.IsRight == true);
+
+                    bool hasIncorrect = userAnswers.Any(ua => ua.AnswerQuestion.IsRight == false);
+
+                    if (allCorrect)
+                    {
+                        ticket.BackgroundColor = Brushes.Green;
+                    }
+                    else if (hasIncorrect)
+                    {
+                        ticket.BackgroundColor = Brushes.Red;
+                    }
+                    else
+                    {
+                        ticket.BackgroundColor = Brushes.Transparent;
+                    }
+                }
+            }
+
+            return tickets;
+        }
+
 
         private void TicketsLV_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            NavigationService.Navigate(new TicketQuestionsPage(contextUser,TicketsLV.SelectedItem as Tickets));
+            var selectedTicket = TicketsLV.SelectedItem as Tickets;
+            if (selectedTicket != null)
+            {
+                NavigationService.Navigate(new TicketQuestionsPage(contextUser, selectedTicket));
+            }
         }
     }
 }
