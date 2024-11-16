@@ -4,11 +4,72 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:DrivingEasy.Pages"
+      xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+      xmlns:lvc="clr-namespace:LiveCharts.Wpf;assembly=LiveCharts.Wpf"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
       Title="StatisticsPage">
 
-    <Grid>
-        
+    <Grid Margin="20">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <!-- Заголовок страницы -->
+        <TextBlock Text="Статистика"
+                   Grid.ColumnSpan="2"
+                   TextAlignment="Center"
+                   HorizontalAlignment="Center"
+                   FontWeight="Bold" 
+                   FontSize="24"
+                   Margin="0,0,0,20"/>
+
+        <!-- Поиск и выбор группы -->
+        <StackPanel Grid.Row="1" Grid.ColumnSpan="2" HorizontalAlignment="Center" Orientation="Horizontal" Margin="0,0,0,20">
+            <TextBox x:Name="SearchTB" 
+                     Height="40"
+                     Width="250"
+                     Padding="10,0"
+                     materialDesign:HintAssist.Hint="Поиск"
+                     Style="{StaticResource MaterialDesignOutlinedTextBox}"/>
+            <ComboBox x:Name="GroupCB"
+                      DisplayMemberPath="Name"
+                      Height="40"
+                      Width="250"
+                      Margin="20,0,0,0"
+                      Padding="10,0"
+                      Style="{StaticResource MaterialDesignOutlinedComboBox}"
+                      materialDesign:HintAssist.Hint="Группа"
+                      SelectionChanged="GroupCB_SelectionChanged"/>
+        </StackPanel>
+
+        <!-- Первый график - Прогресс по билетам -->
+        <StackPanel Grid.Row="2" Grid.Column="0" Margin="10" VerticalAlignment="Top">
+            <TextBlock Text="Прогресс по билетам" FontSize="18" FontWeight="Bold" Margin="0,0,0,10"/>
+            <ScrollViewer HorizontalScrollBarVisibility="Auto">
+                <lvc:CartesianChart x:Name="TicketProgressChart"
+                                    Series="{Binding TicketSeries}"
+                                    LegendLocation="Right"
+                                    MinHeight="300"/>
+            </ScrollViewer>
+        </StackPanel>
+
+        <!-- Второй график - Количество занятий -->
+        <StackPanel Grid.Row="2" Grid.Column="1" Margin="10" VerticalAlignment="Top">
+            <TextBlock Text="Количество занятий" FontSize="18" FontWeight="Bold" Margin="0,0,0,10"/>
+            <ScrollViewer HorizontalScrollBarVisibility="Auto">
+                <lvc:CartesianChart x:Name="SessionsCountChart"
+                                    Series="{Binding SessionSeries}"
+                                    LegendLocation="Right"
+                                    MinHeight="300"/>
+            </ScrollViewer>
+        </StackPanel>
     </Grid>
 </Page>

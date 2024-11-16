@@ -122,12 +122,12 @@ namespace DrivingEasy.Pages
 
         private void StaticticTB_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
-
+            ContentFrame.Navigate(new StatisticsPage(contextUser));
         }
 
         private void StaticticBT_Click(object sender, RoutedEventArgs e)
         {
-
+            ContentFrame.Navigate(new StatisticsPage(contextUser));
         }
     }
 }
