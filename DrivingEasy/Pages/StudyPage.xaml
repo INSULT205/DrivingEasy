@@ -35,6 +35,7 @@
                      FontSize="22"
                     Text="Вопросы" FontWeight="Bold"/>
                 <TextBlock 
+                    x:Name="QuestionCountTB"
                     FontSize="22"
                     TextAlignment="Center"
                     Text="kol-vo"/>
@@ -47,6 +48,7 @@
                     FontSize="22"
             Text="Билеты" FontWeight="Bold"/>
                 <TextBlock
+                     x:Name="TicketsCountTB"
                     FontSize="22"
                     TextAlignment="Center"
             Text="kol-vo"/>
@@ -59,6 +61,7 @@
                     FontSize="22"
     Text="Ошибки" FontWeight="Bold"/>
                 <TextBlock
+                    x:Name="MistakeTB"
                     FontSize="22"
                      TextAlignment="Center"
     Text="kol-vo"/>

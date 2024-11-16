@@ -5,8 +5,8 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:DrivingEasy.Components"
              mc:Ignorable="d" 
-             d:DesignHeight="50" d:DesignWidth="50">
+             d:DesignHeight="65" d:DesignWidth="65">
     <Grid>
-        <Button x:Name="QuestionButton" Width="50" Height="50" />
+        <Button x:Name="QuestionButton" Width="65" Height="65" />
     </Grid>
 </UserControl>

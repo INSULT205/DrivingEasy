@@ -31,6 +31,7 @@
                         </LinearGradientBrush>
                     </Grid.Background>
                 </Grid>
+               
                 <ToggleButton
                HorizontalAlignment="Left"
                Margin="10 0 0 0"

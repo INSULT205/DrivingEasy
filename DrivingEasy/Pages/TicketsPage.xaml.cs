@@ -18,7 +18,7 @@ namespace DrivingEasy.Pages
             InitializeComponent();
             contextUser = user;
             this.typeStudy = typeStudy;
-
+            App.NavMenu.gridMenu.Visibility = Visibility.Visible;
             TicketsLV.ItemsSource = GetTicketsWithResult();
         }
 

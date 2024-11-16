@@ -1,4 +1,5 @@
-﻿using Microsoft.Win32;
+﻿using DrivingEasy.Pages;
+using Microsoft.Win32;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -19,5 +20,6 @@ namespace DrivingEasy
     {
         public static DrivingSchoolEntities DB = new DrivingSchoolEntities();
         public static MainWindow MainWindow;
+        public static NavMenu NavMenu;
     }
 }

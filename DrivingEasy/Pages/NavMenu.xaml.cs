@@ -27,6 +27,7 @@ namespace DrivingEasy.Pages
         public NavMenu(User user)
         {
             InitializeComponent();
+            App.NavMenu = this;
             contextUser = user;
             if (contextUser.RoleId == 1)
             {

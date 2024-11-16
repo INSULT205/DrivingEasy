@@ -24,7 +24,7 @@ namespace DrivingEasy
             contextTickets = tickets;
             this.typeStudy = typeStudy;
             questionButtons = new List<QuestionButtonControl>();
-
+            App.NavMenu.gridMenu.Visibility = Visibility.Collapsed;
             LoadQuestions();
             InitializeQuestionButtons();
 
