@@ -167,7 +167,7 @@ namespace DrivingEasy
 
             if (correctAnswers < totalQuestions)
             {
-                MessageBox.Show($"Вы исправили {correctAnswers} из {totalQuestions} вопросов.");
+                MessageBox.Show($"Вы ответили правильно на {correctAnswers} из {totalQuestions} вопросов.");
                 NavigationService.Navigate(new TicketsPage(contextUser, typeStudy));
             }
             else

@@ -7,7 +7,7 @@
       xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
       xmlns:lvc="clr-namespace:LiveCharts.Wpf;assembly=LiveCharts.Wpf"
       mc:Ignorable="d" 
-      d:DesignHeight="450" d:DesignWidth="800"
+      d:DesignHeight="750" d:DesignWidth="800"
       Title="StatisticsPage">
 
     <Grid Margin="20">
@@ -17,12 +17,7 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="*"/>
-        </Grid.ColumnDefinitions>
 
-        <!-- Заголовок страницы -->
         <TextBlock Text="Статистика"
                    Grid.ColumnSpan="2"
                    TextAlignment="Center"
@@ -31,14 +26,15 @@
                    FontSize="24"
                    Margin="0,0,0,20"/>
 
-        <!-- Поиск и выбор группы -->
-        <StackPanel Grid.Row="1" Grid.ColumnSpan="2" HorizontalAlignment="Center" Orientation="Horizontal" Margin="0,0,0,20">
-            <TextBox x:Name="SearchTB" 
+        <StackPanel Grid.Row="1"  HorizontalAlignment="Center" Orientation="Horizontal">
+            <ComboBox x:Name="StudentCB"
+                     DisplayMemberPath="FullName"
                      Height="40"
                      Width="250"
                      Padding="10,0"
-                     materialDesign:HintAssist.Hint="Поиск"
-                     Style="{StaticResource MaterialDesignOutlinedTextBox}"/>
+                     Style="{StaticResource MaterialDesignOutlinedComboBox}"
+                     materialDesign:HintAssist.Hint="Студент"
+                     SelectionChanged="StudentCB_SelectionChanged"/>
             <ComboBox x:Name="GroupCB"
                       DisplayMemberPath="Name"
                       Height="40"
@@ -50,26 +46,24 @@
                       SelectionChanged="GroupCB_SelectionChanged"/>
         </StackPanel>
 
-        <!-- Первый график - Прогресс по билетам -->
-        <StackPanel Grid.Row="2" Grid.Column="0" Margin="10" VerticalAlignment="Top">
-            <TextBlock Text="Прогресс по билетам" FontSize="18" FontWeight="Bold" Margin="0,0,0,10"/>
+        <StackPanel Grid.Row="2" Orientation="Vertical">
+        <StackPanel Margin="10" VerticalAlignment="Center">
+            <TextBlock Text="Прогресс по билетам" HorizontalAlignment="Center" FontSize="18" FontWeight="Bold" Margin="0,0,0,10"/>
             <ScrollViewer HorizontalScrollBarVisibility="Auto">
                 <lvc:CartesianChart x:Name="TicketProgressChart"
-                                    Series="{Binding TicketSeries}"
                                     LegendLocation="Right"
-                                    MinHeight="300"/>
+                                    MinHeight="250"/>
             </ScrollViewer>
         </StackPanel>
 
-        <!-- Второй график - Количество занятий -->
-        <StackPanel Grid.Row="2" Grid.Column="1" Margin="10" VerticalAlignment="Top">
-            <TextBlock Text="Количество занятий" FontSize="18" FontWeight="Bold" Margin="0,0,0,10"/>
+        <StackPanel Margin="10" VerticalAlignment="Center">
+            <TextBlock HorizontalAlignment="Center" Text="Количество занятий" FontSize="18" FontWeight="Bold" Margin="0,0,0,10"/>
             <ScrollViewer HorizontalScrollBarVisibility="Auto">
                 <lvc:CartesianChart x:Name="SessionsCountChart"
-                                    Series="{Binding SessionSeries}"
                                     LegendLocation="Right"
-                                    MinHeight="300"/>
+                                    MinHeight="250"/>
             </ScrollViewer>
+        </StackPanel>
         </StackPanel>
     </Grid>
 </Page>

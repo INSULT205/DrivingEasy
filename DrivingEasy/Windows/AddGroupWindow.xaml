@@ -32,6 +32,7 @@
                     <TextBox Margin="0 10 0 10"
                             VerticalAlignment="Center"
                             x:Name="GroupTB"
+                            FontSize="20"
                             TextAlignment="Center"
                             Style="{StaticResource MaterialDesignOutlinedTextBox}"/>
                         

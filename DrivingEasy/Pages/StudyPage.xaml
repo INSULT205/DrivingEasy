@@ -77,14 +77,16 @@
                 <Button x:Name="TicketsBT"
                         Click="TicketsBT_Click"
                         Background="#666ad1"
-             Width="150"
-             Height="50"
+                         FontSize="22"
+             Width="250"
+             Height="150"
              Content="Билеты"/>
                 <Button 
-             Width="150"
-             Height="50"
+             Width="250"
+             Height="150"
              Background="#FFBA2327"
              Margin="0 20 0 0"
+                     FontSize="22"
              x:Name="MistakeBT"
              Click="MistakeBT_Click"
              Content="Ошибки"/>
@@ -92,14 +94,16 @@
 
             <StackPanel Margin="20 0 0 0">
                 <Button x:Name="MarathonBT"
-                     Width="150"
-                     Height="50"
+                      Width="250"
+                         FontSize="22"
+                      Height="150"
                      Click="MarathonBT_Click"
                      Content="Марафон"/>
                 <Button 
-                     Width="150"
+                     Width="250"
                     Background="#001970"
-                     Height="50"
+                     Height="150"
+                     FontSize="22"
                      Margin="0 20 0 0"
                      x:Name="ExamBT"
                     Click="ExamBT_Click"

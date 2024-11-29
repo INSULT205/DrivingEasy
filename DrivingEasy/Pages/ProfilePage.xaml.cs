@@ -111,7 +111,10 @@ namespace DrivingEasy.Pages
                 if (r.Id == 1)
                 {
                     var g = GroupCB.SelectedItem as Group;
-                    contextUser.GroupId = g.Id;
+                    if(GroupCB.SelectedItem != null)
+                        contextUser.GroupId = g.Id;
+                    else
+                        contextUser.GroupId = null;
                 }
                 else
                 {

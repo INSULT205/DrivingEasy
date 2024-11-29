@@ -50,9 +50,9 @@ namespace DrivingEasy.Windows
                     error += "Выберите дату\n";
                 if (String.IsNullOrWhiteSpace(TimeDP.Text))
                     error += "Выберите время оказания услуги\n";
-                if (StudentCB.SelectedItem == null && GroupCB.Items == null)
+                if ((TypeClassesCB.SelectedItem as TypeClass).Name == "Практическое" && StudentCB.SelectedItem == null)
                     error += "Выберите студента\n";
-                if (GroupCB.SelectedItem == null && StudentCB.Items == null)
+                if (GroupCB.SelectedItem == null && (TypeClassesCB.SelectedItem as TypeClass).Name == "Теоретическое")
                     error += "Выберите группу\n";
                 if (String.IsNullOrWhiteSpace(error) == false)
                 {

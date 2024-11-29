@@ -5,6 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:DrivingEasy.Windows"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+         WindowStyle="None"
+         WindowStartupLocation="CenterScreen"
         mc:Ignorable="d"
         Title="EditLessonWindow" Height="600" Width="800">
     <Grid>
@@ -91,7 +93,7 @@ VerticalAlignment="Center"/>
     x:Name="EditBT"
     Click="EditBT_Click"
     Margin="10"
-    Content="Редактирование"/>
+    Content="Сохранить"/>
         </StackPanel>
     </Grid>
 </Window>

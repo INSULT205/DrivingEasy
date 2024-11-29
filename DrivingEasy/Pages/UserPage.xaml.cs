@@ -43,7 +43,9 @@ namespace DrivingEasy.Pages.Admin
             var filterProduct = App.DB.User.ToList();
             if (SearchTB.Text.Length > 0)
             {
-                filterProduct = filterProduct.Where(i => i.FullName.ToLower().StartsWith(SearchTB.Text.Trim().ToLower())).ToList();
+                filterProduct = filterProduct
+                    .Where(i => i.FullName.ToLower().Contains(SearchTB.Text.Trim().ToLower()))
+                    .ToList();
             }
 
             var role = RoleCB.SelectedItem as Role;
@@ -100,7 +102,12 @@ namespace DrivingEasy.Pages.Admin
         private void AddUserBT_Click(object sender, RoutedEventArgs e)
         {
             AddUserWindow addUserWindow = new AddUserWindow();
-            addUserWindow.ShowDialog();
+            bool? result = addUserWindow.ShowDialog();
+
+            if (result == true)
+            {
+                Refresh();
+            }
         }
 
         private void Page_Loaded(object sender, RoutedEventArgs e)

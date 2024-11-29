@@ -52,7 +52,8 @@ namespace DrivingEasy.Windows
             {
                 groups = App.DB.Group.ToList();
                 GroupCB.ItemsSource = groups;
-                GroupCB.SelectedIndex = (int)(contextUser.GroupId - 1);
+                if (contextUser.GroupId != null)
+                    GroupCB.SelectedIndex = (int)(contextUser.GroupId - 1);
             }
             else
             {
@@ -93,7 +94,10 @@ namespace DrivingEasy.Windows
                 if (r.Id == 1)
                 {
                     var g = GroupCB.SelectedItem as Group;
-                    contextUser.GroupId = g.Id;
+                    if (g != null)
+                        contextUser.GroupId = g.Id;
+                    else
+                        contextUser.GroupId = null;
                 }
                 else
                 {

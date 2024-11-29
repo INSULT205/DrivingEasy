@@ -150,7 +150,12 @@ namespace DrivingEasy.Pages
         private void AddBT_Click(object sender, RoutedEventArgs e)
         {
             AddLessonWindow addLessonWindow = new AddLessonWindow();
-            addLessonWindow.ShowDialog();
+            bool? result = addLessonWindow.ShowDialog();
+
+            if (result == true) 
+            {
+                Refresh();
+            }
         }
 
 

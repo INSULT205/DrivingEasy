@@ -28,7 +28,6 @@ namespace DrivingEasy
         public virtual DbSet<AnswerQuestion> AnswerQuestion { get; set; }
         public virtual DbSet<Answers> Answers { get; set; }
         public virtual DbSet<Group> Group { get; set; }
-        public virtual DbSet<News> News { get; set; }
         public virtual DbSet<Questions> Questions { get; set; }
         public virtual DbSet<QuestionsTicket> QuestionsTicket { get; set; }
         public virtual DbSet<Role> Role { get; set; }

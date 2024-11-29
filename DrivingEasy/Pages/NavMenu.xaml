@@ -99,7 +99,7 @@
                                     FontSize="18"
                                    FontFamily="Comic Sans MS"
                            VerticalAlignment="Center"
-                           Text="Билеты"/>
+                           Text="Обучение"/>
                     </StackPanel>
 
 

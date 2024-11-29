@@ -37,7 +37,7 @@ namespace DrivingEasy.Pages
             {
                 UserST.Visibility = Visibility.Collapsed;
                 TicketST.Visibility = Visibility.Collapsed;
-             
+
             }
             if (contextUser.RoleId == 3)
             {
@@ -122,12 +122,18 @@ namespace DrivingEasy.Pages
 
         private void StaticticTB_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
-            ContentFrame.Navigate(new StatisticsPage(contextUser));
+            if (contextUser.Role.Name == "Студент")
+                ContentFrame.Navigate(new StudentStatisticsPage(contextUser));
+            else
+                ContentFrame.Navigate(new StatisticsPage(contextUser));
         }
 
         private void StaticticBT_Click(object sender, RoutedEventArgs e)
         {
-            ContentFrame.Navigate(new StatisticsPage(contextUser));
+            if (contextUser.Role.Name == "Студент")
+                ContentFrame.Navigate(new StudentStatisticsPage(contextUser));
+            else
+                ContentFrame.Navigate(new StatisticsPage(contextUser));
         }
     }
 }
