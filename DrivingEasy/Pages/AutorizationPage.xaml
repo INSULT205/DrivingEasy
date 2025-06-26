@@ -12,8 +12,8 @@
     <Grid>
         <Grid.Background>
             <LinearGradientBrush StartPoint="0.1,0" EndPoint="0.9,1">
-                <GradientStop Color="#303f9f" Offset="1" />
-                <GradientStop Color="#cf3539" Offset="0" />
+                <GradientStop Color="#85FF6F" Offset="1" />
+                <GradientStop Color="#E40045" Offset="0" />
             </LinearGradientBrush>
         </Grid.Background>
         
@@ -68,6 +68,8 @@
                             x:Name="LoginBT"
                             Click="LoginBT_Click"
                             Content="Войти"
+                            Foreground="Black"
+                            Background="#85FF6F"
                             Margin="0 10 0 10"/>
                 </StackPanel>
             </StackPanel>

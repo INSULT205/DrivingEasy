@@ -25,6 +25,8 @@
         
         <Button Name="ExitBT" 
                 Content="Выйти"
+                Foreground="Black"
+                Background="#85FF6F"
                 Grid.Row="2"
                 Width="150"
                 HorizontalAlignment="Center"

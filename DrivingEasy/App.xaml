@@ -12,14 +12,14 @@
                 <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesign3.Defaults.xaml" />
                 </ResourceDictionary.MergedDictionaries>
                 <!--PRIMARY-->
-                <SolidColorBrush x:Key="PrimaryHueLightBrush" Color="#303f9f"/>
+            <SolidColorBrush x:Key="PrimaryHueLightBrush" Color="#85FF6F"/>
                 <SolidColorBrush x:Key="PrimaryHueLightForegroundBrush" Color="Black"/>
-                <SolidColorBrush x:Key="PrimaryHueMidBrush" Color="#666ad1"/>
+            <SolidColorBrush x:Key="PrimaryHueMidBrush" Color="#00B454	"/>
                 <SolidColorBrush x:Key="PrimaryHueMidForegroundBrush" Color="Black"/>
-                <SolidColorBrush x:Key="PrimaryHueDarkBrush" Color="#001970"/>
+            <SolidColorBrush x:Key="PrimaryHueDarkBrush" Color="#007536"/>
                 <SolidColorBrush x:Key="PrimaryHueDarkForegroundBrush" Color="Black"/>
                 <!--ACCENT-->
-                <SolidColorBrush x:Key="SecondaryAccentBrush" Color="#cf3539"/>
+            <SolidColorBrush x:Key="SecondaryAccentBrush" Color="#E40045"/>
                 <SolidColorBrush x:Key="SecondaryAccentForegroundBrush" Color="Black"/>
             <!--</ResourceDictionary>-->
         </ResourceDictionary>

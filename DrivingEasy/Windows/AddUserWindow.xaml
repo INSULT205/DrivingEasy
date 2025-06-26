@@ -24,8 +24,8 @@
         <Grid Grid.ColumnSpan="2">
             <Grid.Background>
                 <LinearGradientBrush StartPoint="0.1,0" EndPoint="0.9,1">
-                    <GradientStop Color="#303f9f" Offset="1" />
-                    <GradientStop Color="#cf3539" Offset="0" />
+                    <GradientStop Color="#85FF6F" Offset="1" />
+                    <GradientStop Color="#E40045" Offset="0" />
                 </LinearGradientBrush>
             </Grid.Background>
         </Grid>
@@ -33,8 +33,8 @@
         <Grid Grid.Row="3" Grid.ColumnSpan="2">
             <Grid.Background>
                 <LinearGradientBrush StartPoint="0.1,0" EndPoint="0.9,1">
-                    <GradientStop Color="#303f9f" Offset="1" />
-                    <GradientStop Color="#cf3539" Offset="0" />
+                    <GradientStop Color="#85FF6F" Offset="1" />
+                    <GradientStop Color="#E40045" Offset="0" />
                 </LinearGradientBrush>
             </Grid.Background>
         </Grid>
@@ -103,6 +103,8 @@
             x:Name="AddPhotoBT"
             Click="AddPhotoBT_Click"
             Margin="0 10 0 10"
+            Foreground="Black"
+            Background="#85FF6F"
             Content="Добавить фотографию"/>
         </StackPanel>
 
@@ -112,18 +114,24 @@
             Click="BackBT_Click"
             Margin="10"
             Width="100"
+            Foreground="Black"
+            Background="#85FF6F"
             Content="Вернуться"/>
             <Button
             Width="250"
             x:Name="AddBT"
             Click="AddBT_Click"
             Margin="10"
+            Foreground="Black"
+            Background="#85FF6F"
             Content="Добавить"/>
             <Button
             Width="250"
             x:Name="AddGroupBT"
             Click="AddGroupBT_Click"
             Margin="10"
+            Foreground="Black"
+            Background="#85FF6F"
             Content="Добавить группу"/>
         </StackPanel>
     </Grid>

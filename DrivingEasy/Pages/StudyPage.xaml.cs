@@ -5,6 +5,7 @@ using System.Windows;
 using System.Windows.Controls;
 using DrivingEasy.Pages;
 using System.Windows.Media;
+using DrivingEasy.Windows;
 
 namespace DrivingEasy.Pages
 {
@@ -68,6 +69,13 @@ namespace DrivingEasy.Pages
         private void ExamBT_Click(object sender, RoutedEventArgs e)
         {
             NavigationService.Navigate(new ExamPage(contextUser));
+        }
+
+        private void GameBT_Click(object sender, RoutedEventArgs e)
+        {
+            GameWindow gameWindow = new GameWindow();
+            gameWindow.ShowDialog();
+            
         }
     }
 }

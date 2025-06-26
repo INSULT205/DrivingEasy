@@ -124,12 +124,16 @@
         <StackPanel Grid.Row="3" Grid.ColumnSpan="2" Orientation="Horizontal" HorizontalAlignment="Center">
             <Button
             x:Name="DeleteBT"
+             Foreground="Black"
+             Background="#85FF6F"
             Click="DeleteBT_Click"
             Width="150"
             Margin="5 5 5 5"
             Content="Удалить"/>
             <Button
              x:Name="EditBT"
+             Foreground="Black"
+             Background="#85FF6F"
              Click="EditBT_Click"
              Width="150"
              Margin="5 5 5 5"
@@ -137,6 +141,8 @@
             <Button 
             x:Name="AddUserBT"
             Click="AddUserBT_Click"
+            Foreground="Black"
+            Background="#85FF6F"
             Width="150"
             Margin="5 5 5 5"
             Content="Добавить"/>

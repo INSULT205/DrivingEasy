@@ -178,18 +178,24 @@
         x:Name="DeleteBT"
         Click="DeleteBT_Click"
         Width="150"
+        Foreground="Black"
+        Background="#85FF6F"
         Margin="5 5 5 5"
         Content="Удалить"/>
             <Button
          x:Name="EditBT"
          Click="EditBT_Click"
          Width="150"
+         Foreground="Black"
+         Background="#85FF6F"
          Margin="5 5 5 5"
          Content="Редактировать"/>
             <Button 
         x:Name="AddBT"
         Click="AddBT_Click"
         Width="150"
+        Foreground="Black"
+        Background="#85FF6F"
         Margin="5 5 5 5"
         Content="Добавить"/>
         </StackPanel>

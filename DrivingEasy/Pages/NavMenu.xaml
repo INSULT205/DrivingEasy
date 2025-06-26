@@ -26,8 +26,8 @@
                 <Grid Grid.Column="0" Grid.RowSpan="2">
                     <Grid.Background>
                         <LinearGradientBrush StartPoint="0.1,0" EndPoint="0.9,1">
-                            <GradientStop Color="#303f9f" Offset="1" />
-                            <GradientStop Color="#cf3539" Offset="0" />
+                            <GradientStop Color="#E40045" Offset="1" />
+                            <GradientStop Color="#85FF6F" Offset="0" />
                         </LinearGradientBrush>
                     </Grid.Background>
                 </Grid>
@@ -36,6 +36,7 @@
                HorizontalAlignment="Left"
                Margin="10 0 0 0"
                x:Name="MenuBT"
+               Background="#C9007A"
                Content="{materialDesign:PackIcon Kind=Menu,Size=21}"
                IsChecked="False"
                Style="{StaticResource MaterialDesignFlatPrimaryToggleButton}"
@@ -49,7 +50,8 @@
                            HorizontalAlignment="Center"
                            IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}"
                            Style="{StaticResource MaterialDesignFloatingActionMiniButton}"
-                           ToolTip="MaterialDesignFloatingActionMiniButton">
+                                Background="#C9007A"
+                          ToolTip="MaterialDesignFloatingActionMiniButton">
                             <materialDesign:PackIcon Kind="NewspaperVariantMultiple" />
                         </Button>
                         <TextBlock Margin="10 0 0 0"
@@ -69,7 +71,8 @@
                            HorizontalAlignment="Center"
                            IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}"
                            Style="{StaticResource MaterialDesignFloatingActionMiniButton}"
-                           ToolTip="MaterialDesignFloatingActionMiniButton">
+                            Background="#C9007A"
+                                ToolTip="MaterialDesignFloatingActionMiniButton">
                             <materialDesign:PackIcon Kind="AccountGroup" />
                         </Button>
                         <TextBlock Margin="10 0 0 0" 
@@ -86,6 +89,7 @@
                         <Button Margin="10 0 0 0"
                               x:Name="TicketBT"
                               Click="TicketBT_Click"
+                                 Background="#C9007A"
                               HorizontalAlignment="Center"
                               IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}"
                               Style="{StaticResource MaterialDesignFloatingActionMiniButton}"
@@ -107,6 +111,7 @@
                         <Button Margin="10 0 0 0"
                              x:Name="LessontBT"
                              Click="LessontBT_Click"
+                                 Background="#C9007A"
                             HorizontalAlignment="Center"
                             IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}"
                             Style="{StaticResource MaterialDesignFloatingActionMiniButton}"
@@ -127,6 +132,7 @@
                         <Button Margin="10 0 0 0"
                                 x:Name="StatisticBT"
                                 Click="StaticticBT_Click"
+                                 Background="#C9007A"
                              HorizontalAlignment="Center"
                              IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}"
                              Style="{StaticResource MaterialDesignFloatingActionMiniButton}"
@@ -146,6 +152,7 @@
                     <StackPanel Orientation="Horizontal" Height="60">
                         <Button Margin="10 0 0 0"
                              x:Name="AccountBT"
+                                 Background="#C9007A"
                              Click="AccountBT_Click"
                              HorizontalAlignment="Center"
                              IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}"
